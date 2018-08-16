@@ -1,7 +1,7 @@
 /**************************************************************************//**
- * @file     helper.h
- * @brief    High-level helper function for Lession 3 and later
- * @date     15. August 2018
+ * @file     helper_init.h
+ * @brief    Perform C-compliant memory initializations
+ * @date     16. August 2018
  ******************************************************************************/
 /*
  * Copyright (c) 2018 Milosch Meriac <milosch@meriac.com>. All rights reserved.
@@ -20,11 +20,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef __HELPER_H__
-#define __HELPER_H__
+#ifndef __HELPER_INIT_H__
+#define __HELPER_INIT_H__
 
-#include <Helper/helper_irq.h>
-#include <Helper/helper_printf.h>
-#include <Helper/helper_init.h>
+/* Define main application entry function, contains user application */
+extern void main_entry(void);
 
-#endif/*__HELPER_H__*/
+#endif/*__HELPER_INIT_H__*/
