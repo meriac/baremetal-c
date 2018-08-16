@@ -1,5 +1,5 @@
 /*
-File: printf.h
+File: helper_printf.h
  
 Copyright (c) 2004,2012 Kustaa Nyholm / SpareTimeLabs
 
@@ -32,7 +32,7 @@ OF SUCH DAMAGE.
 
 ----------------------------------------------------------------------
 
-This library is realy just two files: 'printf.h' and 'printf.c'.
+This library is realy just two files: 'helper_printf.h' and 'helper_printf.c'.
 
 They provide a simple and small (+200 loc) printf functionality to 
 be used in embedded systems.
@@ -102,23 +102,14 @@ For further details see source code.
 regs Kusti, 23.10.2004
 */
 
-
 #ifndef __TFP_PRINTF__
 #define __TFP_PRINTF__
 
 #include <stdarg.h>
 
-void init_printf(void* putp,void (*putf) (void*,char));
-
+void tfp_putchar(char);
 void tfp_printf(char *fmt, ...);
 void tfp_sprintf(char* s,char *fmt, ...);
-
 void tfp_format(void* putp,void (*putf) (void*,char),char *fmt, va_list va);
 
-#define printf tfp_printf 
-#define sprintf tfp_sprintf 
-
 #endif
-
-
-

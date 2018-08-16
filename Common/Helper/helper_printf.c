@@ -29,12 +29,9 @@
  * OF SUCH DAMAGE.
  */
 
-#include "printf.h"
+#include "Helper/helper_printf.h"
 
 typedef void (*putcf) (void*,char);
-static putcf stdout_putf;
-static void* stdout_putp;
-
 
 #ifdef PRINTF_LONG_SUPPORT
 
@@ -43,7 +40,7 @@ static void uli2a(unsigned long int num, unsigned int base, int uc,char * bf)
 	int n=0;
 	unsigned int d=1;
 	while (num/d >= base)
-		d*=base;		 
+		d*=base;
 	while (d!=0) {
 		int dgt = num / d;
 		num%=d;
@@ -136,9 +133,7 @@ static void putchw(void* putp,putcf putf,int n, char z, char* bf)
 void tfp_format(void* putp,putcf putf,char *fmt, va_list va)
 	{
 	char bf[12];
-    
 	char ch;
-
 
 	while ((ch=*(fmt++))) {
 		if (ch!='%') 
@@ -211,18 +206,17 @@ void tfp_format(void* putp,putcf putf,char *fmt, va_list va)
 	abort:;
 	}
 
-
-void init_printf(void* putp,void (*putf) (void*,char))
+static void tfp_putchar_handler(void* p, char c)
 	{
-	stdout_putf=putf;
-	stdout_putp=putp;
+		(void)p;
+		tfp_putchar(c);
 	}
 
 void tfp_printf(char *fmt, ...)
 	{
 	va_list va;
 	va_start(va,fmt);
-	tfp_format(stdout_putp,stdout_putf,fmt,va);
+	tfp_format(0,tfp_putchar_handler,fmt,va);
 	va_end(va);
 	}
 
@@ -230,8 +224,6 @@ static void putcp(void* p,char c)
 	{
 	*(*((char**)p))++ = c;
 	}
-
-
 
 void tfp_sprintf(char* s,char *fmt, ...)
 	{

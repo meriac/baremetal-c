@@ -24,5 +24,6 @@
 #define __HELPER_H__
 
 #include <Helper/helper_irq.h>
+#include <Helper/helper_printf.h>
 
 #endif/*__HELPER_H__*/
