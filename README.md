@@ -1,5 +1,7 @@
 # Under the hood: Bare Metal Embedded Programming in C
 
+[![CircleCI](https://circleci.com/gh/meriac/baremetal-c.svg?style=svg)](https://circleci.com/gh/meriac/baremetal-c)
+
 ## Introduction & Scope
 
 A single plain C file is sufficient to express the complete functionality of an embedded system. The [Arm Cortex-M architecture](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/index.html) is designed with C-Code in mind, no assembly level system bring up code is required.

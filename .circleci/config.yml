@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: meriac/arm-gcc
+        user: build
+    steps:
+      - checkout
+      - run:
+          name: Setup Environment Variables
+          command: echo 'export PATH="$PATH:/usr/gcc-arm-none-eabi/bin"' >> $BASH_ENV
+      - run:
+          name: Run Tests
+          command: |
+            circleci tests glob "Lesson*" | circleci tests split --split-by=timings | xargs -I@ -n1 make clean all -C "@"
+      - run:
+          name: Collect firmware images
+          command: mkdir -p ../output && find . \( -name '*.bin' -or -name '*.asm' \) -exec cp \{\} ../output/ \;
+      - store_artifacts:
+          path: ../output
